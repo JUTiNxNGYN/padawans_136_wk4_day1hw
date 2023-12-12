@@ -74,7 +74,7 @@ ORDER BY film_id
 SELECT *
 FROM customer
 WHERE store_id = 1
-HAVING last_name like 'es'
+HAVING last_name like 'es' -- does not work
 
 -- There are 13 customer names having a last name with 'es'
 
@@ -82,10 +82,13 @@ HAVING last_name like 'es'
 -- 9. How many payment amounts (4.99, 5.99, etc.) had a number of rentals above 250 for customers
 -- with ids between 380 and 430? (use group by and having > 250)
 
-SELECT *
+SELECT amount, count(amount)
 FROM payment
 WHERE customer_id between 380 and 430
-GROUP BY rental_id > 250
+GROUP BY amount
+HAVING count(amount) > 250
+
+-- There are 3 payment methods: -415.01, -413.01, -411.01
 
 -- 10. Within the film table, how many rating categories are there? And what rating has the most
 -- movies total?
